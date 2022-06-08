@@ -1,0 +1,14 @@
+name: UHCRun
+version: '${project.version}'
+main: eu.ethernity.uhcrun.UHCRun
+authors: [ Martinecko30 ]
+
+commands:
+  uhcrun:
+    aliases: [ uhc, run ]
+  join:
+    permission: "uhcrun.join"
+  leave:
+    permission: "uhcrun.leave"
+  party:
+    permission: "uhcrun.party"

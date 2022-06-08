@@ -1,0 +1,27 @@
+# Kazdy text moze zacinat farbou &
+
+# General
+no-permission: "&c&lPrepac ale na toto nemas opravnenie!"
+unknown-command: "Neznamy prikaz"
+available-commands: "&6&lDostupne prikazy"
+
+# Hra
+unavailable-game: "&c&lNedostupna hra!"
+not-enough-games: "&c&lNedostatok volnych hier"
+joined-game: "&a&lPripojil si sa do hry"
+started-game: "&aZacal si tuto hru! &8<game>"
+left-game: "&6&lOdpojil si sa z hry"
+invalid-game: "&c&lZadal si neplatnu hru!"
+not-enough-players: "&c&lNedostatok hracov <game>"
+already-in-game: "&c&lUz sa nachádzaš v hre"
+
+# Party
+created-party: "&a&lVytvoril si party"
+
+# Mapy
+invalid-map: "&c&lZadal si neplatnu mapu"
+unknown-map: "&c&lNeznama mapa!"
+set-center: "Uspesne zmeneny stred mapy"
+added-map: "&a&lUspesne pridana mapa!"
+team-size-changed: "&a&lZmenil si velkost teamu na <size>"
+too-big-team-size: "&c&lMoc vela hracov pre jeden tym"

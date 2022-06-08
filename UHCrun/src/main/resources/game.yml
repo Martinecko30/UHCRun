@@ -1,0 +1,28 @@
+max-players: 30
+min-players: 5
+max-seconds-to-join: 300
+
+# Spawn rates
+coal: 21
+iron: 9
+gold: 9
+redstone: 9
+diamond: 7
+lapis: 9
+emerald: 7
+
+# Spawn height
+coal-height: 50
+iron-height: 40
+gold-height: 30
+redstone-height: 128
+diamond-height: 20
+lapis-height: 30
+emerald-height: 20
+
+# World boder in-game
+border:
+  starting-size: 10000
+  final-size: 100
+  # The seconds it takes to shrink to final size | Starts after mining period
+  secs-to-final: 1800
