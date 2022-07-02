@@ -18,6 +18,11 @@ public class StartGameCommand implements ICommand {
     }
 
     @Override
+    public String getAlias() {
+        return null;
+    }
+
+    @Override
     public String getUsage() {
         return "/waterrun start [game]";
     }
@@ -46,39 +51,24 @@ public class StartGameCommand implements ICommand {
     public boolean perform(UHCRun plugin, CommandSender sender, String[] args) {
         Player player = (Player) sender;
 
-        if (args.length <= getMinArgs()) {
-            if (plugin.getGameManager().isInGame(player)) {
-                Game game = plugin.getGameManager().getGame(player);
-                game.startGame();
-                player.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("started-game").replace("<game>", game.getName())));
-                return true;
-            } else {
-                player.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("invalid-game")));
-                return false;
-            }
+        if(args.length > 1 && args[1].equalsIgnoreCase("force")) {
+            plugin.getGameManager().startGame();
+            player.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("started-game").replace("<game>", plugin.getGameManager().getGame().getName())));
+            return true;
         }
 
-        if (plugin.getGameManager().existGame(args[1])) {
-            if (plugin.getGameManager().getGame(args[1]).getPlayers().size() >= 1) {
-                plugin.getGameManager().getGame(args[1]).startGame();
-                player.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("started-game").replace("<game>", args[1])));
-            }
-            player.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("not-enough-players").replace("<game>", args[1])));
-        } else {
-            player.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("invalid-game")));
+        if(plugin.getGameManager().getGame().getPlayers().size() < 10) { //TODO: variable
+            player.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("not-enough-players")));
+            return false;
         }
-        return false;
+
+        plugin.getGameManager().startGame();
+        player.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("started-game").replace("<game>", plugin.getGameManager().getGame().getName())));
+        return true;
     }
 
     @Override
     public List<String> tabComplete(UHCRun plugin, CommandSender sender, String[] args) {
-        List<String> tabComplete = new ArrayList<>();
-        if (args.length == 2) {
-            plugin.getGameManager().clearGames();
-            for (Game game : plugin.getGameManager().getGames())
-                if (game.getPlayers().size() >= 1)
-                    tabComplete.add(game.getName());
-        }
-        return tabComplete;
+        return null;
     }
 }

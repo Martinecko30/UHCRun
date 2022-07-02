@@ -23,6 +23,11 @@ public class Party {
         players.add(player);
     }
 
+    public void sendMessage(String message) {
+        for(Player player : players)
+            player.sendMessage(message);
+    }
+
     public boolean isInParty(Player player) {
         return players.contains(player);
     }

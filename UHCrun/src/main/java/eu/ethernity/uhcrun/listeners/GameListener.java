@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -93,6 +94,22 @@ public class GameListener implements Listener {
             event.getBlock().setType(Material.AIR);
             event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.WOOD, 4));
         }
+
+        if(event.getBlock().getType() == Material.LONG_GRASS) {
+            event.setCancelled(true);
+            event.getBlock().setType(Material.AIR);
+            if(random.nextBoolean())
+                event.getBlock().getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.WHEAT, 1));
+        }
+    }
+
+    @EventHandler
+    public void onAnimalDeath(EntityDeathEvent event) {
+        if(!plugin.getGameManager().getGame().isStarted())
+            return;
+
+        event.getDrops().clear();
+        event.getDrops().add(new ItemStack(Material.COOKED_BEEF, 1));
     }
 
     @EventHandler
@@ -124,6 +141,6 @@ public class GameListener implements Listener {
         if(!plugin.getGameManager().isInGame((Player) event.getPlayer()))
             return;
 
-        plugin.getGameManager().getGame(event.getPlayer()).removePlayer(event.getPlayer());
+        plugin.getGameManager().leaveGame(event.getPlayer());
     }
 }

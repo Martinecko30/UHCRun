@@ -9,6 +9,11 @@ import java.util.List;
 public class AddPlayerCommand implements ICommand {
     @Override
     public String getLabel() {
+        return null; //TODO: add player
+    }
+
+    @Override
+    public String getAlias() {
         return null;
     }
 

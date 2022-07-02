@@ -1,4 +1,4 @@
-package eu.ethernity.uhcrun.world;
+package eu.ethernity.uhcrun.world.populators;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -53,7 +53,7 @@ public class CavePopulator extends BlockPopulator {
         int blockY = block.getY();
         int blockZ = block.getZ();
         while (world.getBlockAt(blockX, blockY, blockZ).getType() != Material.AIR) {
-            if (snakeBlocks.size() > 4000) {
+            if (snakeBlocks.size() > 6000) {
                 break;
             }
 

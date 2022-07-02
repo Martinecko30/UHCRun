@@ -15,6 +15,11 @@ public class RemoveBorder implements ICommand {
     }
 
     @Override
+    public String getAlias() {
+        return null;
+    }
+
+    @Override
     public String getUsage() {
         return "/uhcrun removeborder";
     }

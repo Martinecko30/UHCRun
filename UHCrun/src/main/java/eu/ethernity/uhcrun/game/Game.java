@@ -142,7 +142,7 @@ public class Game {
         border = null;
         map.destroyWorld();
         map.setGame(null);
-        plugin.getGameManager().removeGame(this);
+        plugin.getGameManager().restartGame();
     }
 
     public void  removePlayers() {
@@ -164,5 +164,9 @@ public class Game {
 
     public String getName() {
         return name;
+    }
+
+    public Map getMap() {
+        return map;
     }
 }

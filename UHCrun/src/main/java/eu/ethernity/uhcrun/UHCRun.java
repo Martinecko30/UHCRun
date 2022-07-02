@@ -8,9 +8,6 @@ import eu.ethernity.uhcrun.configs.GameConfig;
 import eu.ethernity.uhcrun.configs.MessagesConfig;
 import eu.ethernity.uhcrun.game.GameManager;
 import eu.ethernity.uhcrun.listeners.GameListener;
-import eu.ethernity.uhcrun.listeners.SetupInventoryListener;
-import eu.ethernity.uhcrun.map.Map;
-import eu.ethernity.uhcrun.map.MapManager;
 import eu.ethernity.uhcrun.players.party.PartyManager;
 import eu.ethernity.uhcrun.utils.Logger;
 import org.bukkit.Bukkit;
@@ -21,7 +18,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 
 public final class UHCRun extends JavaPlugin {
-    private MapManager mapManager;
     private GameManager gameManager;
     private PartyManager partyManager;
 
@@ -34,8 +30,6 @@ public final class UHCRun extends JavaPlugin {
             new MessagesConfig(this);
             new GameConfig(this);
 
-
-            mapManager = new MapManager(this);
             gameManager = new GameManager(this);
             partyManager = new PartyManager(this);
 
@@ -53,9 +47,8 @@ public final class UHCRun extends JavaPlugin {
     @Override
     public void onDisable() {
         try {
-            mapManager.destroyMaps();
-            mapManager.save();
             gameManager.removePlayers();
+            gameManager.getGame().getMap().destroyWorld();
         } catch (Exception e) {
             Bukkit.getLogger().log(Level.SEVERE, e.getMessage());
             if(getConfig().getBoolean("debug"))
@@ -71,16 +64,11 @@ public final class UHCRun extends JavaPlugin {
     }
 
     private void initListeners() {
-        initListener(new SetupInventoryListener(this));
         initListener(new GameListener(this));
     }
 
     private void initListener(Listener listener) {
         Bukkit.getPluginManager().registerEvents(listener, this);
-    }
-
-    public MapManager getMapManager() {
-        return mapManager;
     }
 
     public GameManager getGameManager() {

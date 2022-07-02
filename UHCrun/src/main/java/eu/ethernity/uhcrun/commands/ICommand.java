@@ -10,6 +10,8 @@ public interface ICommand {
 
     String getLabel();
 
+    String getAlias();
+
     String getUsage();
 
     String getPermission();

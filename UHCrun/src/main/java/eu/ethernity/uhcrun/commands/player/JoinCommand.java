@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JoinCommand implements CommandExecutor, TabCompleter {
+public class JoinCommand implements CommandExecutor {
 
     private final UHCRun plugin;
 
@@ -32,24 +32,8 @@ public class JoinCommand implements CommandExecutor, TabCompleter {
             return false;
         }
 
-        Player player = (Player) sender;
-
-        if (args.length <= 0) {
-            plugin.getGameManager().joinRandomGame(player);
-        } else if (args.length == 1) {
-            plugin.getGameManager().joinGame(player, args[0]);
-            return true;
-        }
+        plugin.getGameManager().joinGame((Player) sender);
+        sender.sendMessage(Utils.tc(MessagesConfig.getConfig().getString("joined-game")));
         return true;
-    }
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        List<String> tabComplete = new ArrayList<>();
-        plugin.getMapManager().startAvailableLevels();
-        for(Map map : plugin.getMapManager().getMaps()) {
-            tabComplete.add(map.getName());
-        }
-        return tabComplete;
     }
 }

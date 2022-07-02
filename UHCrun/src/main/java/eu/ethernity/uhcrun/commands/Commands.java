@@ -1,11 +1,7 @@
 package eu.ethernity.uhcrun.commands;
 
 import eu.ethernity.uhcrun.UHCRun;
-import eu.ethernity.uhcrun.commands.game.GamesCommand;
 import eu.ethernity.uhcrun.commands.game.StartGameCommand;
-import eu.ethernity.uhcrun.commands.setup.SetCenterCommand;
-import eu.ethernity.uhcrun.commands.setup.SetTeamSizeCommand;
-import eu.ethernity.uhcrun.commands.setup.SetupCommand;
 import eu.ethernity.uhcrun.commands.special.RemoveBorder;
 import eu.ethernity.uhcrun.configs.MessagesConfig;
 import eu.ethernity.uhcrun.utils.Utils;
@@ -17,6 +13,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Commands implements CommandExecutor, TabCompleter {
@@ -26,12 +23,8 @@ public class Commands implements CommandExecutor, TabCompleter {
     public Commands(UHCRun plugin) {
         this.plugin = plugin;
 
-        subCommands.add(new SetupCommand());
-        subCommands.add(new SetCenterCommand());
         subCommands.add(new RemoveBorder());
-        subCommands.add(new GamesCommand());
         subCommands.add(new StartGameCommand());
-        subCommands.add(new SetTeamSizeCommand());
     }
 
 
@@ -79,7 +72,7 @@ public class Commands implements CommandExecutor, TabCompleter {
             for (ICommand subCommand : subCommands) {
                 if (subCommand.getLabel() == null) continue;
 
-                if (subCommand.getLabel().equalsIgnoreCase(args[0])) {
+                if (subCommand.getLabel().equalsIgnoreCase(args[0]) || subCommand.getAlias().equalsIgnoreCase(args[0])) {
                     if (subCommand.getPermission() != null) {
                         if (!sender.hasPermission(subCommand.getPermission())) {
                             return new ArrayList<>();

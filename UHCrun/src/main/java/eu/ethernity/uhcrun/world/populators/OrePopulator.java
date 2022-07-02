@@ -1,4 +1,4 @@
-package eu.ethernity.uhcrun.world;
+package eu.ethernity.uhcrun.world.populators;
 
 
 import java.util.Random;

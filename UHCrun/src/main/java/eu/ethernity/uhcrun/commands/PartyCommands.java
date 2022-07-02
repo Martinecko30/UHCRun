@@ -2,7 +2,6 @@ package eu.ethernity.uhcrun.commands;
 
 import eu.ethernity.uhcrun.UHCRun;
 import eu.ethernity.uhcrun.commands.party.AddPlayerCommand;
-import eu.ethernity.uhcrun.commands.setup.SetupCommand;
 import eu.ethernity.uhcrun.configs.MessagesConfig;
 import eu.ethernity.uhcrun.utils.Utils;
 import org.bukkit.Bukkit;
